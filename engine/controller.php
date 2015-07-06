@@ -9,9 +9,14 @@ class Controller extends Application{
 		
 		parent::__construct();
 		
-		if (!$GLOBALS['CODEKIR']['LOGS']){
-			$this->loadModel('helper_model');
-			$GLOBALS['CODEKIR']['LOGS'] = new helper_model;
+		if (!isset($GLOBALS['CODEKIR']['LOGS'])){
+
+			if ($this->configkey=='default'){
+				$this->loadModel('helper_model');
+				$this->loadModel('contentHelper');
+				$GLOBALS['CODEKIR']['LOGS'] = new helper_model;	
+			}
+			
 		}
 		
 
@@ -22,21 +27,27 @@ class Controller extends Application{
 	function index()
 	{
 		
-		global $CONFIG, $LOCALE, $basedomain, $title, $DATA, $app_domain, $CODEKIR;
+		global $CONFIG, $LOCALE, $basedomain, $rootpath, $title, $DATA, $app_domain, $CODEKIR;
 		$filePath = APP_CONTROLLER.$this->page.$this->php_ext;
 		
 		$this->view = $CODEKIR['smarty'];
 		$this->view->assign('basedomain',$basedomain);
+		$this->view->assign('app_domain',$app_domain);
+        $this->view->assign('rootpath',$rootpath);
 		$this->view->assign('page',$DATA[$this->configkey]);
+		
 		
 		if ($this->configkey=='default')$this->view->assign('user',$this->isUserOnline());
 		if ($this->configkey=='admin')$this->view->assign('admin',$this->isAdminOnline());
 		if ($this->configkey=='dashboard')$this->view->assign('dashboard',$this->isAdminOnline());
+		if ($this->configkey=='services')$this->view->assign('services',$this->isAdminOnline());
 		
-		// $this->inject();
-		// pr($this->isAdminOnline());
+
+		if ($this->configkey=='admin'){
+			// $this->view->assign('menu',$this->menuDinamis());
+		}
+
 		
-		// exit;
 		if (file_exists($filePath)){
 			
 			if ($DATA[$this->configkey]['page']!=='login'){
@@ -59,38 +70,20 @@ class Controller extends Application{
 			}
 
 			if ($this->configkey == 'default'){
+				if ($DATA[$this->configkey]['page']=='register'){
 
-				// pr($DATA);
-				// $this->inject();
-
-				$ignoreClass = array('login','register');
-				if (in_array($DATA[$this->configkey]['page'], $ignoreClass)){
-
-					/* remove session if user exist in same browser */
-					$ignoreFunc = array('validate','accountValid','doLogin','doSignup');
-					if (in_array($DATA[$this->configkey]['function'], $ignoreFunc)){
-						// do nothing
-					}else{
-						if ($this->isUserOnline()){
+					
+					if ($this->isUserOnline()){
 						// redirect($CONFIG[$this->configkey]['default_view']);
 						redirect($basedomain);
 						exit;
-						}
-						
 					}
 
-				}else{
-
-					if (!$this->isUserOnline()){
-						redirect($CONFIG[$this->configkey]['login']);
-						exit;
-					}
+					
 					
 				}
-
-				
 			}
-			// pr($DATA);
+			
 			if ($this->configkey == 'admin'){
 				if ($DATA[$this->configkey]['page']=='login'){
 					if ($this->isAdminOnline()){
@@ -100,7 +93,7 @@ class Controller extends Application{
 				}
 			}
 
-			if ($this->configkey == 'dashboard'){ echo '1';
+			if ($this->configkey == 'dashboard'){ 
 				if ($DATA[$this->configkey]['page']=='login'){
 					if ($this->isAdminOnline()){
 					redirect($CONFIG[$this->configkey]['default_view']);
@@ -109,7 +102,16 @@ class Controller extends Application{
 				}
 			}
 
-			// echo 'ada';
+			if ($this->configkey == 'services'){  
+				if ($DATA[$this->configkey]['page']=='login'){
+					if ($this->isAdminOnline()){
+					redirect($CONFIG[$this->configkey]['default_view']);
+					exit;
+					}
+				}
+			}
+
+			
 			include $filePath;
 			
 			$createObj = new $this->page();
@@ -267,9 +269,73 @@ class Controller extends Application{
 	function log($action='surf',$comment)
 	{
 		$getHelper = new helper_model;
-
+		
 		$getHelper->logActivity($action,$comment);
 
+	}
+
+	function modified_array_column($data, $param)
+	{
+		if ($data){
+			foreach ($data as $key => $value) {
+				$newData[] = $value[$param];
+			}
+			return $newData;
+		}
+		
+		return false;
+		
+	}
+
+	function array_flatten($array) { 
+	  if (!is_array($array)) { 
+	    return FALSE; 
+	  } 
+	  $result = array(); 
+	  foreach ($array as $key => $value) { 
+	    if (is_array($value)) { 
+	      $result = array_merge($result, array_flatten($value)); 
+	    } 
+	    else { 
+	      $result[$key] = $value; 
+	    } 
+	  } 
+	  return $result; 
+	}
+
+	function menuDinamis()
+	{
+
+		$this->loadModel('helper_model');
+
+		$getHelper = new helper_model;
+		
+		$adminid = $this->isAdminOnline();
+		// pr($adminid);
+
+		if ($adminid){
+			$data['userid'] = $adminid['id'];
+
+
+			$data = $getHelper->getMenu($data);
+			// pr($data);
+			$menuAkses = explode(',', $data['akses_user'][0]['menu_akses']);
+			foreach ($data['menu'] as $key => $value) {
+				
+				if ($value){
+					foreach ($value as $val) {
+						if (in_array($val['menuID'], $menuAkses)){
+							$newData[$key][] = $val;
+						}
+					}
+				}
+				
+			}
+			// pr($newData);
+			return $newData;
+		}
+		return false;
+		
 	}
 	
 }

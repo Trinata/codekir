@@ -75,12 +75,12 @@ class Session
 		$uniqSess = sha1($CONFIG[$configkey]['root_path'].'codekir-v0.1');
 
 		if ($sessName){
-			$_SESSION[$uniqSess][$sessName] = $dataSesion;
+			$_SESSION[$uniqSess][$sessName] = encode($dataSesion);
 		}else{
 			
 			// default session App
 			
-			$_SESSION[$uniqSess][$configkey] = $dataSesion;
+			$_SESSION[$uniqSess][$configkey] = encode($dataSesion);
 		}
 		
 		
@@ -90,7 +90,6 @@ class Session
 	public function get_session($sessName=false)
 	{
 		global $CONFIG;
-		
 		if (array_key_exists('admin', $CONFIG)){
 			$configkey = 'admin';
 		}
@@ -109,8 +108,7 @@ class Session
 			if (isset($_SESSION[$uniqSess])) $session = $_SESSION[$uniqSess];
 		}
 		
-		
-		return $session;
+		if (isset($session[$configkey])) return decode($session[$configkey]);
 	}
     
     public function delete_session($sessName=false)

@@ -23,6 +23,9 @@ class Application {
 		if (array_key_exists('dashboard', $CONFIG)){
 			$this->configkey = 'dashboard';
 		}
+		if (array_key_exists('services', $CONFIG)){
+			$this->configkey = 'services';
+		}
 
 		// pr($DATA);exit;
 		$this->php_ext = $CONFIG[$this->configkey]['php_ext'];
@@ -102,7 +105,7 @@ class Application {
 	function loadView($fileName='home', $data="")
 	{
 		
-		global $CONFIG, $basedomain, $app_domain;
+		global $CONFIG, $basedomain, $rootpath, $app_domain;
 		
 		if ($fileName == "") return false;
 		if (array_key_exists('admin', $CONFIG)){
@@ -110,6 +113,9 @@ class Application {
 		}
 		if (array_key_exists('dashboard', $CONFIG)){
 			$this->configkey = 'dashboard';
+		}
+		if (array_key_exists('services', $CONFIG)){
+			$this->configkey = 'services';
 		}
 		$getFileView = null;
 		// $php_ext = $CONFIG[$this->configkey]['php_ext'];
@@ -125,6 +131,8 @@ class Application {
 		if (!$this->view) $this->view = $this->setSmarty();
 		
 		$this->view->assign('basedomain',$basedomain);
+		$this->view->assign('app_domain',$app_domain);
+        $this->view->assign('rootpath',$rootpath);
 		
 		/* include file view */
 		if (is_file(APP_VIEW.$fileName.$html_ext)) {
@@ -155,13 +163,14 @@ class Application {
 	
 	
 	
-	function load($param=false)
+	function load($param=false, $debug=false)
 	{
 		
 		if (!$param) return false;
 		
 		if ($param['file'] !='') $fileName = $param['file'].'.php';
 		
+		if ($debug){ pr($param['path'].$fileName); exit; }
 		if (is_file($param['path'].$fileName)){
 		
 			include_once $param['path'].$fileName;
@@ -206,6 +215,9 @@ class Application {
 		
 		if (array_key_exists('admin', $CONFIG)){
 			$this->configkey = 'admin';
+		}
+		if (array_key_exists('services', $CONFIG)){
+			$this->configkey = 'services';
 		}
 		
 		$php_ext = $CONFIG[$this->configkey]['php_ext'];

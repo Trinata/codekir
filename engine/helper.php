@@ -22,7 +22,8 @@ function vd($data)
 
 function _p($data)
 {
-	return clean($_POST[$data]);
+
+	if (isset($_POST[$data]))return clean($_POST[$data]);
 }
 
 function _g($data)
@@ -53,6 +54,16 @@ function error_code($code=000)
 	pr($msg);
 }
 
+function debug($var=false)
+{
+	if ($var) pr($var);
+	else pr('masuk');
+	exit;
+}
 
+function db($var=false)
+{
+	debug($var);
+}
 
 ?>
