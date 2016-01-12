@@ -1,0 +1,192 @@
+<!doctype html>
+<!-- The Time Machine GitHub pages theme was designed and developed by Jon Rohan, on Feb 7, 2012. -->
+<!-- Follow him for fun. http://twitter.com/jonrohan. Tail his code on https://github.com/jonrohan -->
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+  <link rel="stylesheet" href="stylesheets/stylesheet.css" media="screen">
+  <link rel="stylesheet" href="stylesheets/github-dark.css">
+  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+  <script type="text/javascript" src="javascripts/script.js"></script>
+
+  <title>CodeKir Framework</title>
+  <meta name="description" content="Lazy Coding">
+
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+
+</head>
+
+<body>
+
+  <div class="wrapper">
+    <header>
+      <h1 class="title">CodeKir Framework</h1>
+    </header>
+    <div id="container">
+      <p class="tagline">Lazy Coding</p>
+      <div id="main" role="main">
+        <div class="download-bar">
+        <div class="inner">
+          <a href="https://github.com/Trinata/codekir/tarball/master" class="download-button tar"><span>Download</span></a>
+          <a href="https://github.com/Trinata/codekir/zipball/master" class="download-button zip"><span>Download</span></a>
+          <a href="https://github.com/Trinata/codekir" class="code">View CodeKir Framework on GitHub</a>
+        </div>
+        <span class="blc"></span><span class="trc"></span>
+        </div>
+        <article class="markdown-body">
+          <h3>
+<a id="tentang-codekir" class="anchor" href="#tentang-codekir" aria-hidden="true"><span class="octicon octicon-link"></span></a>Tentang Codekir</h3>
+
+<p>Framework Codekir adalah salah satu contoh framework berbasis PHP yang mengadopsi alur kerja dari framework Code Igniter (CI) framework ini diinisiasi oleh Ovan Cop hingga kemudian dikembangkan secara bersama sama oleh CV. Trinata Teknologi dan CV. Bhayanaka Digital serta berkolaborasi dengan IBC Universitas Gunadarma, hingga saat ini framework codekir sudah merilis versi selanjutnya 1.1</p>
+
+<h3>
+<a id="instalasi" class="anchor" href="#instalasi" aria-hidden="true"><span class="octicon octicon-link"></span></a>Instalasi</h3>
+
+<p>Instalasi Framework Codekir tidak berbeda jauh dengan Framework yang lain pada umumnya tidak diperlukan file instalasi pada framework ini yang perlu dilakukan hanyalah menempatkan framework ini pada tempat (folder) yang seharusnya yaitu di dalam document root apache (folder www maupun htdocs). berikut ini langkah - langkah yang harus dilakukan sebelum menggunakan framework codekir</p>
+
+<ul>
+<li>Pastikan server bisa menjalankan file .htaccess karena framework ini memanfaatkan file .htaccess untuk melakukan routing sistem</li>
+<li>Ubah konfigurasi aplikasi di file /app/config/config.php dan /admin/config/config.php sesuai dengan aplikasi yang ingin dibuat</li>
+<li>Jika menggunakan database, sesuaikan konfigurasinya pada file /app/config/access.php serta /admin/config/config.php dengan database yang digunakan</li>
+<li>Pastikan hak akses folder cache/, public_assets/, logs/ dan tmp/, admin/cache/, admin/logs/ bisa melakukan aksi baca, tulis, eksekusi (777)</li>
+</ul>
+
+<h3>
+<a id="model-view-control" class="anchor" href="#model-view-control" aria-hidden="true"><span class="octicon octicon-link"></span></a>Model-View-Control</h3>
+
+<p>Framework ini menggunakan prinsip Model View Control (MVC) seperti pada beberapa framework lainnya. Framework ini akan menjalankan fungsi controller yang ada pada folder app/.</p>
+
+<ul>
+<li>Controller, digunakan untuk menjalankan alur data sesuai dengan permintaan dari user, mengarahkan ke file-file yang berhubungan baik ke model maupun ke file template. File controller berada didalam folder /app/controller/ dengan ekstension .php. </li>
+<li>View, merupakan kumpulan dari template yang digunakan oleh aplikasi, folder ini berada pada direktori /app/view/. didalam direktori view/ bisa dibuat direktori baru sesuai dengan keinginan dalam mengelompokkan file template. Framework ini menggunakan template engine Smarty untuk mengkonversi data dari PHP ke HTML</li>
+<li>Model, merupakan interface database yang digunakan dalam aplikasi, semua transaksi yang keluar masuk di database harus melewati file ini. Kumpulan file model berada di bawah direktori /app/model/</li>
+</ul>
+
+<h3>
+<a id="konfigurasi" class="anchor" href="#konfigurasi" aria-hidden="true"><span class="octicon octicon-link"></span></a>Konfigurasi</h3>
+
+<p>Konfigurasi front-end</p>
+
+<pre><code>/* Konfigurasi APP */
+$CONFIG['default']['app_status'] = 'Development';
+$CONFIG['default']['app_debug'] = TRUE;
+$CONFIG['default']['php_ext'] = '.php';
+$CONFIG['default']['html_ext'] = '.html';
+$CONFIG['default']['default_view'] = 'home';
+</code></pre>
+
+<p>Konfigurasi Back-end</p>
+
+<pre><code>/* Konfigurasi ADMIN */
+$CONFIG['admin']['app_status'] = 'Development';
+$CONFIG['admin']['app_debug'] = TRUE;
+$CONFIG['admin']['php_ext'] = '.php';
+$CONFIG['admin']['html_ext'] = '.html';
+$CONFIG['admin']['default_view'] = 'home';
+</code></pre>
+
+<p>Konfigurasi Database </p>
+
+<pre><code>$dbConfig[0]['host'] = 'host'; 
+$dbConfig[0]['user'] = 'username'; 
+$dbConfig[0]['pass']   = 'password'; 
+$dbConfig[0]['name']   = 'database_name'; 
+$dbConfig[0]['server'] = 'mysql'; 
+$dbConfig[0]['prefix'] = ''; 
+$dbConfig[0]['preftable'] = 'ck'; 
+</code></pre>
+
+<h3>
+<a id="referensi-database" class="anchor" href="#referensi-database" aria-hidden="true"><span class="octicon octicon-link"></span></a>Referensi Database</h3>
+
+<h5>
+<a id="memanggil-model" class="anchor" href="#memanggil-model" aria-hidden="true"><span class="octicon octicon-link"></span></a>Memanggil Model</h5>
+
+<p>Jika konfigurasi database sudah sesuai dengan akun pengaturan database yang dituju maka koneksi dari class database ke database bisa dilakukan dengan cara mengaktifkan fungsi berikut ini <code>$this-&gt;loadModel('namaModel');</code> Fungsi diatas akan memanggil file model untuk dieksekusi, file model biasanya berisi baris query database dan secara otomatis melakukan koneksi ke database sesuai dengan konfigurasi yang sudah diatur sebelumnya. Nama model adalah nama file model yang terdapat pada direktori app/model</p>
+
+<h5>
+<a id="menjalankan-query" class="anchor" href="#menjalankan-query" aria-hidden="true"><span class="octicon octicon-link"></span></a>Menjalankan query</h5>
+
+<p>Untuk menjalankan query ke database bisa menggunakan fungsi berikut ini </p>
+
+<div class="highlight highlight-text-html-php"><pre><span class="pl-s1"><span class="pl-smi">$this</span><span class="pl-k">-&gt;</span>query(<span class="pl-smi">$query</span>);</span></pre></div>
+
+<p>atau </p>
+
+<div class="highlight highlight-text-html-php"><pre><span class="pl-s1"><span class="pl-smi">$this</span><span class="pl-k">-&gt;</span>fetch(<span class="pl-smi">$query</span>);</span></pre></div>
+
+<p>Kedua perintah diatas mempunyai fungsi yang berbeda beda, perintah <code>$this-&gt;query</code> digunakan untuk mengeksekusi query dengan operasi <code>INSERT</code>, <code>UPDATE</code> dan <code>DELETE</code> sedangkan perintah <code>$this-&gt;fetch</code> hanya digunakan untuk query dengan operasi SELECT. Kedua perintah tersebut memiliki parameter yang sama untuk digunakan didalam fungsinya yaitu query SQL yang diwakili oleh variabel $query. Hasil eksekusi perintah <code>$this-&gt;query</code> dalam bentuk nilai bolean yaitu 0 untuk gagal dan 1 untuk berhasil sedangkan untuk perintah <code>$this-&gt;fetch</code> nilai kembaliannya dalam bentuk array</p>
+
+<h5>
+<a id="hasil-query" class="anchor" href="#hasil-query" aria-hidden="true"><span class="octicon octicon-link"></span></a>Hasil query</h5>
+
+<p>Hasil query yang dieksekusi pada perintah <code>$this-&gt;fetch</code> akan berupa array, untuk mengakses data hasil pemrosesan perintah tersebut adalah dengan cara mengakses indeksnya terlebih dahulu, aturan dasar pada variabel array</p>
+
+<div class="highlight highlight-text-html-php"><pre><span class="pl-s1"><span class="pl-smi">$sql</span> <span class="pl-k">=</span> <span class="pl-s"><span class="pl-pds">"</span>YOUR SELECT QUERY<span class="pl-pds">"</span></span>;                  </span>
+<span class="pl-s1"><span class="pl-smi">$result</span> <span class="pl-k">=</span> <span class="pl-smi">$this</span><span class="pl-k">-&gt;</span>fetch(<span class="pl-smi">$sql</span>);        </span>
+<span class="pl-s1"><span class="pl-k">if</span> (<span class="pl-smi">$result</span>){</span>
+<span class="pl-s1">    <span class="pl-k">foreach</span> (<span class="pl-smi">$result</span> <span class="pl-k">as</span> <span class="pl-smi">$key</span> <span class="pl-k">=&gt;</span> <span class="pl-smi">$value</span>) {   </span>
+<span class="pl-s1">       <span class="pl-smi">$value</span>[<span class="pl-s"><span class="pl-pds">'</span>YOUR-INDEX<span class="pl-pds">'</span></span>];</span>
+<span class="pl-s1">    }                      </span>
+<span class="pl-s1">}</span></pre></div>
+
+<h5>
+<a id="query-helper" class="anchor" href="#query-helper" aria-hidden="true"><span class="octicon octicon-link"></span></a>Query Helper</h5>
+
+<p>Class database juga sudah dilengkapi dengan fungsi bantuan untuk melakukan eksekusi query ke database, salah satu contoh fungsi yang bisa dilakukan adalah sebagai berikut </p>
+
+<div class="highlight highlight-text-html-php"><pre><span class="pl-s1"><span class="pl-smi">$sql</span> <span class="pl-k">=</span> <span class="pl-c1">array</span>(</span>
+<span class="pl-s1">            <span class="pl-s"><span class="pl-pds">'</span>table<span class="pl-pds">'</span></span><span class="pl-k">=&gt;</span><span class="pl-s"><span class="pl-pds">"</span>user<span class="pl-pds">"</span></span>,</span>
+<span class="pl-s1">        <span class="pl-s"><span class="pl-pds">'</span>field<span class="pl-pds">'</span></span><span class="pl-k">=&gt;</span><span class="pl-s"><span class="pl-pds">"</span>COUNT(1) AS total<span class="pl-pds">"</span></span>,</span>
+<span class="pl-s1">        <span class="pl-s"><span class="pl-pds">'</span>condition<span class="pl-pds">'</span></span> <span class="pl-k">=&gt;</span> <span class="pl-s"><span class="pl-pds">"</span>n_status = 1<span class="pl-pds">"</span></span>,</span>
+<span class="pl-s1">        <span class="pl-s"><span class="pl-pds">'</span>limit<span class="pl-pds">'</span></span> <span class="pl-k">=&gt;</span> <span class="pl-c1">10</span>                </span>
+<span class="pl-s1">        );</span>
+<span class="pl-s1"><span class="pl-smi">$result</span> <span class="pl-k">=</span> <span class="pl-smi">$this</span><span class="pl-k">-&gt;</span>lazyQuery(<span class="pl-smi">$sql</span>,<span class="pl-smi">$debug</span>);</span></pre></div>
+
+<p>Fungsi diatas (lazyQuery) adalah fungsi bantuan untuk menjalankan query operasi <code>SELECT</code> ke database dengan parameter data dengan tipe data array, data array pada variabel <code>$sql</code> memiliki index yang merujuk ke tabel database yang akan diakses antara lain index 'table' digunakan untuk definisi nama tabel, 'field' untuk definisi field apa saja yang mau diambil, index 'condition' berupa kondisi yang akan digunakan dalam query dan index 'limit' berfungsi untuk membatasi jumlah data yang dihasilkan. Sedangkan fungsi bantuan untuk operasi <code>UPDATE</code> dan <code>INSERT</code> bisa menggunakan fungsi berikut ini</p>
+
+<div class="highlight highlight-text-html-php"><pre><span class="pl-s1"><span class="pl-smi">$this</span><span class="pl-k">-&gt;</span>save(<span class="pl-s"><span class="pl-pds">"</span>update<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span><span class="pl-smi">$table</span><span class="pl-pds">"</span></span>, <span class="pl-smi">$data</span>, <span class="pl-smi">$id</span>, <span class="pl-smi">$debug</span>);</span></pre></div>
+
+<p>Fungsi tersebut memiliki 5 parameter yang harus didefinisikan terlebih dahulu, berikut penjelasan kelima parameter tersebut</p>
+
+<ul>
+<li>"update", adalah parameter pertama dari fungsi ini yang bertujuan untuk mendefinisikan metode yang akan dieksekusi. Nilai dari parameter ini yaitu "update" ataupun "insert"</li>
+<li>
+<code>$table</code>, merupakan definisi variabel nama tabel pada database yang akan dituju</li>
+<li>
+<code>$data</code>, adalah variabel array yang berisi hasil post data dari form, bentuk datanya dalam format array 1 dimensi</li>
+<li>
+<code>$id</code>, apabila menggunakan metode "update" maka variabel ini harus terdefinisi namun jika menggunakan metode “insert” maka variabel ini bisa dikosongkan</li>
+<li>
+<code>$debug</code>, berfungsi untuk melakukan debuging query, nilainya berupa boolean dengan ketentuan nilai 1 untuk mengaktifkan mode debug sedangkan nilai 0 untuk menonaktifkan mode debug</li>
+</ul>
+
+<h3>
+<a id="support-or-contact" class="anchor" href="#support-or-contact" aria-hidden="true"><span class="octicon octicon-link"></span></a>Support or Contact</h3>
+
+<p>Having trouble with Pages? <a href="https://github.com/TrinataBhayanaka">contact support</a> and we’ll help you sort it out.</p>
+        </article>
+      </div>
+    </div>
+    <footer>
+      <div class="owner">
+      <p><a href="https://github.com/Trinata" class="avatar"><img src="https://avatars0.githubusercontent.com/u/8234474?v=3&amp;s=60" width="48" height="48"></a> <a href="https://github.com/Trinata">Trinata</a> maintains <a href="https://github.com/Trinata/codekir">CodeKir Framework</a></p>
+
+
+      </div>
+      <div class="creds">
+        <small>This page generated using <a href="https://pages.github.com/">GitHub Pages</a><br>theme by <a href="https://twitter.com/jonrohan/">Jon Rohan</a></small>
+      </div>
+    </footer>
+  </div>
+  <div class="current-section">
+    <a href="#top">Scroll to top</a>
+    <a href="https://github.com/Trinata/codekir/tarball/master" class="tar">tar</a><a href="https://github.com/Trinata/codekir/zipball/master" class="zip">zip</a><a href="" class="code">source code</a>
+    <p class="name"></p>
+  </div>
+
+  
+</body>
+</html>
