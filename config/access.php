@@ -1,6 +1,9 @@
 <?php
 /* Konfigurasi DB */
 
+$dbConfig[0]['active']   = true;
+
+
 $dbConfig[0]['host']   = 'host';
 $dbConfig[0]['user']   = 'user';
 $dbConfig[0]['pass']   = 'password';

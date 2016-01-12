@@ -10,6 +10,7 @@ define ('CODEKIR', true);
 define ('LIBS', 'libs/');
 define ('LOGS', 'logs/');
 define ('TMP', 'tmp/');
+define ('CACHE', 'cache/');
 
 require_once (COREPATH.'loader.php');
 
@@ -137,6 +138,13 @@ $route = substr($route, strlen('/index.php'));
 // exit;
 $controller = new Controller;
 $controller->index();
+
+
+if ($dbConfig[0]['active']){
+	$initDB = new Database;
+	$initDB->initialitation();
+}
+
 
 exit;
 

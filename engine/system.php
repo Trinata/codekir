@@ -145,6 +145,12 @@ $route = substr($route, strlen('/index.php'));
 $controller = new Controller;
 $controller->index();
 
+if ($dbConfig[0]['active']){
+	$initDB = new Database;
+	$initDB->initialitation();
+}
+
+
 exit;
 
 ?>

@@ -19,11 +19,11 @@ $CONFIG['admin']['default_view'] = 'home';
 $CONFIG['admin']['login'] = 'login';
 
 
-$CONFIG['admin']['app_url'] = 'http://localhost/codekir/v0.2/';
-$CONFIG['admin']['base_url'] = 'http://localhost/codekir/v0.2/admin/';
-$CONFIG['admin']['root_path'] = $_SERVER['DOCUMENT_ROOT'].'/codekir/v0.2/admin';
+$CONFIG['admin']['app_url'] = 'http://localhost/codekir/codekir/';
+$CONFIG['admin']['base_url'] = 'http://localhost/codekir/codekir/admin/';
+$CONFIG['admin']['root_path'] = $_SERVER['DOCUMENT_ROOT'].'/codekir/codekir/admin';
 
-$CONFIG['admin']['upload_path'] = $_SERVER['DOCUMENT_ROOT'].'/codekir/v0.2/public_assets/';
+$CONFIG['admin']['upload_path'] = $_SERVER['DOCUMENT_ROOT'].'/codekir/codekir/public_assets/';
 
 $CONFIG['admin']['max_filesize'] = 2097152;
 
@@ -36,6 +36,7 @@ $app_domain = $CONFIG['admin']['app_url'];
 
 /* Konfigurasi DB */
 
+$dbConfig[0]['active']   = TRUE;
 $dbConfig[0]['host'] = 'host';
 $dbConfig[0]['user'] = 'user';
 $dbConfig[0]['pass'] = 'password';
