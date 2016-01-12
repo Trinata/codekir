@@ -19,9 +19,9 @@ $CONFIG['default']['salt'] = "";
 $CONFIG['default']['hostname'] = "";
 
 $CONFIG['default']['base_url'] = 'http://localhost/codekir/v0.2/';
-$CONFIG['default']['root_path'] = $_SERVER['DOCUMENT_ROOT'].'/codekir/v0.2';
+$CONFIG['default']['root_path'] = $_SERVER['DOCUMENT_ROOT'].'/codekir';
 
-$CONFIG['default']['upload_path'] = $_SERVER['DOCUMENT_ROOT'].'/codekir/v0.2/tmp/';
+$CONFIG['default']['upload_path'] = $_SERVER['DOCUMENT_ROOT'].'/codekir/tmp/';
 $CONFIG['default']['max_filesize'] = 2097152;
 $CONFIG['default']['upload_path_temporary'] = "/home/";
 $CONFIG['default']['zip_foldername'] = "PUT_YOUR_ZIP_HERE";
